@@ -1,0 +1,183 @@
+Sure! Let's enhance your page by adding Andhra veg and non-veg items with checkboxes, using Bootstrap for styling. We'll also include functionality to download the selected items as a PDF. Here's the updated code:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering Business</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #ff6347;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Food section styling */
+        .food-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .food-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .food-item img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        .food-item h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .food-item p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .food-item {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .food-item {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Delicious Catering</h1>
+        <p>Bringing gourmet food to your events</p>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Catering</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="food-section">
+        <div class="food-item">
+            <img src="food1.jpg" alt="Food Item 1">
+            <h3>Grilled Chicken</h3>
+            <p>Delicious grilled chicken with herbs and spices.</p>
+            <input type="checkbox" class="food-checkbox" value="Grilled Chicken">
+        </div>
+        <div class="food-item">
+            <img src="food2.jpg" alt="Food Item 2">
+            <h3>Vegetable Platter</h3>
+            <p>Fresh and colorful vegetable platter.</p>
+            <input type="checkbox" class="food-checkbox" value="Vegetable Platter">
+        </div>
+        <div class="food-item">
+            <img src="food3.jpg" alt="Food Item 3">
+            <h3>Fruit Salad</h3>
+            <p>Refreshing fruit salad with seasonal fruits.</p>
+            <input type="checkbox" class="food-checkbox" value="Fruit Salad">
+        </div>
+        <!-- Andhra Veg Items -->
+        <div class="food-item">
+            <img src="andhra_veg1.jpg" alt="Andhra Veg Item 1">
+            <h3>Pesarattu</h3>
+            <p>Green gram dosa served with chutney.</p>
+            <input type="checkbox" class="food-checkbox" value="Pesarattu">
+        </div>
+        <div class="food-item">
+            <img src="andhra_veg2.jpg" alt="Andhra Veg Item 2">
+            <h3>Gutti Vankaya</h3>
+            <p>Stuffed brinjal curry.</p>
+            <input type="checkbox" class="food-checkbox" value="Gutti Vankaya">
+        </div>
+        <!-- Andhra Non-Veg Items -->
+        <div class="food-item">
+            <img src="andhra_nonveg1.jpg" alt="Andhra Non-Veg Item 1">
+            <h3>Andhra Chicken Curry</h3>
+            <p>Spicy chicken curry with Andhra spices.</p>
+            <input type="checkbox" class="food-checkbox" value="Andhra Chicken Curry">
+        </div>
+        <div class="food-item">
+            <img src="andhra_nonveg2.jpg" alt="Andhra Non-Veg Item 2">
+            <h3>Chepala Pulusu</h3>
+            <p>Fish curry with tamarind sauce.</p>
+            <input type="checkbox" class="food-checkbox" value="Chepala Pulusu">
+        </div>
+    </section>
+    <div class="text-center">
+        <button class="btn btn-primary" onclick="downloadPDF()">Download Selected Items</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script>
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            let selectedItems = [];
+
+            document.querySelectorAll('.food-checkbox:checked').forEach(checkbox => {
+                selectedItems.push(checkbox.value);
+            });
+
+            doc.text("Selected Food Items:", 10, 10);
+            selectedItems.forEach((item, index) => {
+                doc.text(`${index + 1}. ${item}`, 10, 20 + (index * 10));
+            });
+
+            doc.save('selected_food_items.pdf');
+        }
+    </script>
+</body>
+</html>
+```
+
+This code uses Bootstrap for styling and includes checkboxes for the food items. The `downloadPDF` function collects the selected items and generates a PDF using jsPDF. You can test this on various devices and let me know if you need any further adjustments!
+
+Source: Conversation with Copilot, 1/8/2024
+(1) github.com. https://github.com/qnguyen81/MyFoto/tree/4dc24f739f8f5943db8f9d7dff62755ce2c581f0/newPost.php.
+(2) github.com. https://github.com/syn-arch/movieus/tree/00daea021eb3af6a58a7ede7d9c3eeee8142b3ba/assets%2Fjs%2Fcomponent%2Fmy-navbar.js.
+(3) github.com. https://github.com/harisnovrial/angkel_PPL/tree/fffb182874535cc17166dce6c3ddbedd984b8341/index.php.
+(4) github.com. https://github.com/rahul-10-byte/Covid-Tracker/tree/7bc5358277fd328c86d10ebc302f08f80b965f13/worldcorona.php.
+(5) github.com. https://github.com/DimitriRomano/FoodLocation/tree/00330a5b8300e8affbe28b0fbad5e2a012853f01/php%2Freservation.php.
+(6) github.com. https://github.com/don1291/Pizza-project/tree/b50b1e72da20981da0f6ab55baed2ccb6492b04f/pizza%2Findex.php.
+(7) github.com. https://github.com/bavindu/ambasevana/tree/58b718e64f8185adcc57809fd836e412ee4e59b9/customer%2Fui%2Fheader.php.
+(8) github.com. https://github.com/Krettika/Eniacoder/tree/ce21b1384f71a577dbd38f0194f05a32e44bd8e5/index.md.
+(9) github.com. https://github.com/joshuaoyerinde/joshuaoyerinde/tree/177b984b8839e0832da29336da1188d26b944633/nav.php.
+(10) github.com. https://github.com/therandomcodewriter/charity/tree/28f1083f9b2d2fd76075a9e83877b05a53959a73/h.php.
+(11) github.com. https://github.com/rodneyasante/Stanbicproject/tree/2af1b211748da64ac1d1d51dde3cfdf4c0bc7d85/resources%2Fviews%2Ftemplates%2Fconference.blade.php.
